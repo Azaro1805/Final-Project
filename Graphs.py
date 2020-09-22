@@ -8,8 +8,6 @@ gr1 = nx.Graph()
 gr1.add_node(0, pos=(1, 1))
 gr1.add_node(1, pos=(1, 2))
 gr1.add_node(2, pos=(2, 4))
-gr1.add_node(3, pos=(3, 4))
-gr1.add_node(4, pos=(4, 5))
 
 '''add edge : gr1.add_edge(0, 1) '''
 
