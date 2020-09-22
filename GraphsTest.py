@@ -15,7 +15,7 @@ for x in range(len(gr2)):
 print("Labels :", labels)
 
 neighbors = gr2.edges()
-print ( "the neighbors : ", neighbors)
+print ( "the neighbors egdes: ", neighbors)
 
 nx.draw_networkx_labels(gr2,pos,labels,font_size=5)
 plt.show()
