@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import random
 
-sns.set()
 gr1 = nx.Graph()
 
 gr1.add_node(0, pos=(1, 1))
@@ -15,12 +14,10 @@ gr1.add_node(3, pos=(3, 4))
 
 '''add many edges at once :  gr1.add_edges_from([(0, 1), (1, 2), (2, 3), (3, 1)])'''
 
-
 '''gr1.add_edge(0, 1, weight=10)
 gr1.add_edge(1, 2, weight=10)
 gr1.add_edge(2, 3, weight=10)
 gr1.add_edge(3, 1, weight=10)
-
 
 weight = nx.get_edge_attributes(gr1, 'weight')
 pos = nx.get_node_attributes(gr1, 'pos')
@@ -30,10 +27,8 @@ nx.draw_networkx(gr1, pos)
 plt.show()
 '''
 
-
 '''nx.draw_networkx_edge_labels(gr1, pos, edge_labels=weight)'''
 '''add weight to the graph'''
-
 
 gr2 = nx.gnp_random_graph(10, 0.4, seed=354, directed=False)
 nx.draw(gr2, with_labels=True)
@@ -50,7 +45,6 @@ for x in range(len(gr2)):
 
 print("Labels :", labels)
 
-
 '''o2 = list(gr2.nodes)
 print(o2)'''
 
@@ -62,3 +56,5 @@ print ( "the neighbors : ", neighbors)
 
 nx.draw_networkx_labels(gr2,pos,labels,font_size=5)
 plt.show()
+
+
