@@ -11,11 +11,10 @@ pos=nx.spring_layout(gr2)
 labels = {}
 for x in range(len(gr2)):
     labels[x] = random.choice(['A', 'B', 'C'])
-
 print("Labels :", labels)
 
 neighbors = gr2.edges()
-print ( "the neighbors egdes: ", neighbors)
+print ( "the neighbors: ", neighbors)
 
 nx.draw_networkx_labels(gr2,pos,labels,font_size=5)
 plt.show()
