@@ -20,6 +20,9 @@ MaxFriendsOut = 0.1
 for i in range (numberOfCom):
     sizes[i] = random.randint(MinPeople,MaxPeople)
 
+
+
+
 for a in range (numberOfCom):
     for b in range(numberOfCom):
         if ( probs[a][b] == 0):
@@ -39,7 +42,29 @@ print(np.matrix(probs))
 BlockGraph = nx.stochastic_block_model(sizes, probs, seed=364)
 edges = nx.edges(BlockGraph)
 
+Opinions={}
+for x in range(len(BlockGraph)):
+    Opinions[x] = random.choice(['A', 'B', 'C'])
+print(" opinions:")
+print (Opinions )
+
 print("edges :")
 print(edges)
+pair=list(edges.keys())[0]
+print(pair[0])
 
-plt.show(nx.draw(BlockGraph , pos = nx.spring_layout(BlockGraph)))
+friends= [  {int} for j in range(len(BlockGraph) )]
+friends[0].add(1)
+print("friends :")
+print (friends)
+'''for d in range(len(edges)):
+    pair=list(edges.keys())[d]
+    friends[pair[0]].add(pair[1])
+    friends[pair[1]].add(pair[0])
+
+print("friends :")
+print(friends)'''
+
+
+'''plt.show(nx.draw(BlockGraph , pos = nx.spring_layout(BlockGraph)))'''
+
