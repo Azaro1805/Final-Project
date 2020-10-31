@@ -149,7 +149,7 @@ for a1 in range (xLengthGraph):
         '''print(np.matrix(votes2))'''
 
     winnerVotes= [0 for i7 in range(len(typeOfVotes))]
-    x1=max(winnerVotes)
+    '''x1=max(winnerVotes)'''
 
     for y2 in range(len(BlockGraph)):
         for i6 in range(len(typeOfVotes)):
