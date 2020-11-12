@@ -6,6 +6,8 @@ import numpy as np
 import copy
 from collections import defaultdict
 
+random.seed(364)
+
 '''get two arrays and return the winner name'''
 def getWinner (winnerVotes,typeOfVotes):
     winners2 =""
