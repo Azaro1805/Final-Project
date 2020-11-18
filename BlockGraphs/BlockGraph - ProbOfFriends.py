@@ -175,7 +175,7 @@ for a1 in range (xLengthGraph):
     MaxFriendsIn = 0.4 + a1/20
     MinFriendsOut = 0.01 + a1/50
     MaxFriendsOut = 0.1 + a1/50
-    print("The Round : " , a1 , "the" , Xlegend )
+    print("The Round : " , a1+1 , "the" , Xlegend )
     print(" MinProbIn  : " ,MinFriendsIn ,  " max  : " , MaxFriendsIn )
     print(" MinProbOut  : ", MinFriendsOut, " max  : ", MaxFriendsOut)
     changeVarArry(changeVar,MinFriendsIn,MaxFriendsIn,MinFriendsOut,MaxFriendsOut)
