@@ -214,8 +214,6 @@ for a1 in range (xLengthGraph):
 
         for f in range(len(friends)):
             counter=0
-            if(len(friends2[f])==0 and (len(friends2)-1)!=f):
-                f=f+1
             counter = countMyOpinion(typeOfVotes, Opinions, votes, counter, f)
             counter = countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f)
             change = percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change)
