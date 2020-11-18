@@ -136,17 +136,17 @@ def prints (typeOfVotes, winnerVotes, winnerStart, Opinions2, edges):
 
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.6
-MinFriendsOut = 0.01
-MaxFriendsOut = 0.1
+MinFriendsOut = 0.1
+MaxFriendsOut = 0.2
 threshold = 0.6
 typeOfVotes=["A","B","C"]
 winnerStart=''
 winnerFinal=''
-xLengthGraph=2
+xLengthGraph=4
 Xlegend = "Number of friends"
 TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
-numberOfCom = 2
+numberOfCom = 10
 WinnerGraph = [ "" for j in range(xLengthGraph)]
 Opinions2 = {}
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
@@ -159,9 +159,9 @@ for a1 in range (xLengthGraph):
     numOfIteration=0
     MinPeople = (a1*10)
     MaxPeople = (a1*10)+10
-    print("The Round : " , a1 , "the" , Xlegend , " min  : " , MinPeople,  " max  : " , MaxPeople )
+    print("The Round : ", a1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
 
-    sizes = [ 0 for i in range(numberOfCom) ]
+    sizes = [0 for i in range(numberOfCom)]
     probs = [[0 for i in range(numberOfCom)] for j in range(numberOfCom)]
 
     '''creats random communities '''
@@ -179,9 +179,8 @@ for a1 in range (xLengthGraph):
 
     BlockGraph = nx.stochastic_block_model(sizes, probs, seed=364)
     edges = nx.edges(BlockGraph)
-    friends= [  {-1} for j in range(len(BlockGraph) )]
-    Opinions=creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
-
+    friends = [{-1} for j in range(len(BlockGraph))]
+    Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
     votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
     votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
     winnerStart = getWinner(winnerVotes, typeOfVotes)
@@ -204,8 +203,6 @@ for a1 in range (xLengthGraph):
 
         for f in range(len(friends)):
             counter=0
-            if(len(friends2[f])==0 and (len(friends2)-1)!=f):
-                f=f+1
             counter = countMyOpinion(typeOfVotes, Opinions, votes, counter, f)
             counter = countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f)
             change = percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change)
