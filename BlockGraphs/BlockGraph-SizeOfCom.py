@@ -134,6 +134,13 @@ def prints (typeOfVotes, winnerVotes, winnerStart, Opinions2, edges):
     print("edges :")
     print(edges)
 
+def printStartWinner ():
+    print(np.matrix(typeOfVotes))
+    print(np.matrix(winnerVotes))
+    print("Start winner is:", winnerStart)
+
+
+
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.6
 MinFriendsOut = 0.1
@@ -142,11 +149,11 @@ threshold = 0.6
 typeOfVotes=["A","B","C"]
 winnerStart=''
 winnerFinal=''
-xLengthGraph=4
+xLengthGraph= 3
 Xlegend = "Number of friends"
 TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
-numberOfCom = 10
+numberOfCom = 3
 WinnerGraph = [ "" for j in range(xLengthGraph)]
 Opinions2 = {}
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
@@ -159,7 +166,7 @@ for a1 in range (xLengthGraph):
     numOfIteration=0
     MinPeople = (a1*10)
     MaxPeople = (a1*10)+10
-    print("The Round : ", a1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
+    print("The Round : ", a1+1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
 
     sizes = [0 for i in range(numberOfCom)]
     probs = [[0 for i in range(numberOfCom)] for j in range(numberOfCom)]
@@ -184,11 +191,12 @@ for a1 in range (xLengthGraph):
     votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
     votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
     winnerStart = getWinner(winnerVotes, typeOfVotes)
+    prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
     Clean(winnerVotes)
+
     for x in range(len(BlockGraph)):
         Countvotes(typeOfVotes, winnerVotes, Opinions2, x)
 
-    prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
 
     setFridends(edges, friends)
 
@@ -197,6 +205,7 @@ for a1 in range (xLengthGraph):
 
     while(change):
         friends2 = runInit(friends, votes, votes2)
+        #winnerStart = getWinner(winnerVotes, typeOfVotes)
         numOfIteration = numOfIteration + 1
         print( "numOfIteration is : " , numOfIteration)
         change = False
