@@ -194,7 +194,7 @@ for a1 in range (xLengthGraph):
     changeVar[a1] = threshold
     Opinions = copy.deepcopy(Opinions2)
     print()
-    print("The Round : " , a1 , "the" , Xlegend , "is : " , threshold )
+    print("The Round : " , a1+1 , "the" , Xlegend , "is : " , threshold )
     change = True
     numOfIteration=0
     while(change ):
