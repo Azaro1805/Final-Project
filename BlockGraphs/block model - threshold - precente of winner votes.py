@@ -142,6 +142,19 @@ def getValue(a):
         x=b
         a.remove(b)
         return  x
+
+def getDiffrenceVotes (winnerfinal, winnerStart, combineVotes , i):
+    winnerfinal2 = getWinner (winnerfinal,typeOfVotes)
+    if(winnerfinal2=="A"):
+        combineVotes[i][0] = winnerStart [0]
+        combineVotes[i][1] = winnerfinal [0]
+    if (winnerfinal2 == "B"):
+        combineVotes[i][0] = winnerStart[1]
+        combineVotes[i][1] = winnerfinal[1]
+    if (winnerfinal2 == "C"):
+        combineVotes[i][0] = winnerStart[2]
+        combineVotes[i][1] = winnerfinal[2]
+    return
 max_of_iter= 6
 numberOfCom = 10
 MinPeople = 20
@@ -179,6 +192,10 @@ friends= [  {-1} for j in range(len(BlockGraph) )]
 
 Opinions=creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
 winnerStart = getWinner (winnerVotes,typeOfVotes)
+startVotes = copy.deepcopy(winnerVotes)
+finals_winners_votes =[ [ 0 for i in range(2) ] for j in range(10) ]
+print(np.matrix(finals_winners_votes))
+
 votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
 votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
 
@@ -221,6 +238,8 @@ for a1 in range (xLengthGraph):
     print("final votes")
     print(np.matrix(typeOfVotes))
     print(np.matrix(winnerVotes))
+    print(winnerVotes[2])
+    getDiffrenceVotes(winnerVotes, startVotes, finals_winners_votes , a1)
     print("Final Winner is:",WinnerGraph[a1])
 
     TotalIter[a1] = numOfIteration
@@ -229,6 +248,7 @@ print("End  : ")
 print(np.matrix(changeVar))
 print(np.matrix(TotalIter))
 
+print(np.matrix(finals_winners_votes))
 # מדד אחוז שינוי מנצח (מספר הפעמים שמשתנה המנצח)
 Ylabel = " Final Winner is :"
 CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
