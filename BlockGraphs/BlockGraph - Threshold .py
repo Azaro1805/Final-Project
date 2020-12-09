@@ -142,14 +142,14 @@ def getValue(a):
         x=b
         a.remove(b)
         return  x
-
-numberOfCom = 4
-MinPeople = 10
-MaxPeople = 20
+max_of_iter= 6
+numberOfCom = 10
+MinPeople = 20
+MaxPeople = 30
 sizes = [ 0 for i in range(numberOfCom) ]
 probs = [ [ 0 for i in range(numberOfCom) ] for j in range(numberOfCom) ]
 MinFriendsIn = 0.4
-MaxFriendsIn = 0.5
+MaxFriendsIn = 0.6
 MinFriendsOut = 0.01
 MaxFriendsOut = 0.1
 threshold = 0
@@ -190,14 +190,17 @@ print("friends :")
 print(friends)
 
 for a1 in range (xLengthGraph):
-    threshold = 0.55 + a1/20
+    threshold = 0.35 + a1/20
     changeVar[a1] = threshold
     Opinions = copy.deepcopy(Opinions2)
     print()
     print("The Round : " , a1+1 , "the" , Xlegend , "is : " , threshold )
     change = True
     numOfIteration=0
-    while(change ):
+    while(change):
+        if(max_of_iter==numOfIteration):
+            print("break while")
+            break
         friends2 = runInit(friends, votes, votes2)
         numOfIteration = numOfIteration + 1
         print("numOfIteration is : ", numOfIteration)
@@ -231,5 +234,5 @@ Ylabel = "Number of Iterations"
 CreatePlotGraph (changeVar, TotalIter , Xlegend , Ylabel)
 
 # Winner Plot
-Ylabel = " Final Winner is :"
-CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
+#Ylabel = " Final Winner is :"
+#CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
