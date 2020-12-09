@@ -229,10 +229,9 @@ print()
 print("End  : ")
 print(np.matrix(changeVar))
 print(np.matrix(TotalIter))
-# Threshold plot
+
+
+# מדד זמן התכנסות
 Ylabel = "Number of Iterations"
 CreatePlotGraph (changeVar, TotalIter , Xlegend , Ylabel)
 
-# Winner Plot
-#Ylabel = " Final Winner is :"
-#CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
