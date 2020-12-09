@@ -139,8 +139,6 @@ def printStartWinner ():
     print(np.matrix(winnerVotes))
     print("Start winner is:", winnerStart)
 
-
-
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.6
 MinFriendsOut = 0.1
@@ -149,11 +147,11 @@ threshold = 0.6
 typeOfVotes=["A","B","C"]
 winnerStart=''
 winnerFinal=''
-xLengthGraph= 3
+xLengthGraph= 10
 Xlegend = "Number of friends"
 TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
-numberOfCom = 3
+numberOfCom = 0
 WinnerGraph = [ "" for j in range(xLengthGraph)]
 Opinions2 = {}
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
@@ -161,11 +159,11 @@ change = True
 
 '''checking on different size of communities'''
 for a1 in range (xLengthGraph):
-
+    numberOfCom = a1+2
     change = True
     numOfIteration=0
-    MinPeople = (a1*10)
-    MaxPeople = (a1*10)+10
+    MinPeople = round(100/numberOfCom)
+    MaxPeople = round(100/numberOfCom)
     print("The Round : ", a1+1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
 
     sizes = [0 for i in range(numberOfCom)]
@@ -174,7 +172,7 @@ for a1 in range (xLengthGraph):
     '''creats random communities '''
     for i in range(numberOfCom):
         sizes[i] = random.randint(MinPeople, MaxPeople)
-    changeVar[a1] = sum(sizes)
+    changeVar[a1] = numberOfCom
 
     probMatrix(numberOfCom, probs, MinFriendsIn, MaxFriendsIn)
 
@@ -244,8 +242,8 @@ print(np.matrix(changeVar))
 print(np.matrix(TotalIter))
 
 # Threshold plot
-Ylabel= "number of iterations"
-CreatePlotGraph (changeVar, TotalIter , Xlegend , Ylabel)
+Ylabel= "Number of Iterations"
+CreatePlotGraph (changeVar, TotalIter , "Number of Communities" , Ylabel)
 
 # Winner Plot
 print(np.matrix(WinnerGraph))
