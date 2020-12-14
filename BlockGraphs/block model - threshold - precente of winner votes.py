@@ -146,25 +146,27 @@ def getValue(a):
 def getDiffrenceVotes (winnerfinal, winnerStart, combineVotes , i):
     winnerfinal2 = getWinner (winnerfinal,typeOfVotes)
     if(winnerfinal2=="A"):
-        combineVotes[i][0] = winnerStart [0]
-        combineVotes[i][1] = winnerfinal [0]
+        combineVotes[0][i] = winnerfinal[0]
+        combineVotes[1][i] = winnerfinal[0]
     if (winnerfinal2 == "B"):
-        combineVotes[i][0] = winnerStart[1]
-        combineVotes[i][1] = winnerfinal[1]
+        combineVotes[0][i] = winnerStart[1]
+        combineVotes[1][i] = winnerfinal[1]
     if (winnerfinal2 == "C"):
-        combineVotes[i][0] = winnerStart[2]
-        combineVotes[i][1] = winnerfinal[2]
+        combineVotes[0][i] = winnerfinal[2]
+        combineVotes[1][i] = winnerfinal[2]
     return
-max_of_iter= 6
-numberOfCom = 10
-MinPeople = 20
-MaxPeople = 30
+
+random.seed (364)
+max_of_iter= 10
+numberOfCom = 20
+MinPeople = 45
+MaxPeople = 55
 sizes = [ 0 for i in range(numberOfCom) ]
 probs = [ [ 0 for i in range(numberOfCom) ] for j in range(numberOfCom) ]
 MinFriendsIn = 0.4
-MaxFriendsIn = 0.6
-MinFriendsOut = 0.01
-MaxFriendsOut = 0.1
+MaxFriendsIn = 0.7
+MinFriendsOut = 0.1
+MaxFriendsOut = 0.3
 threshold = 0
 typeOfVotes=["A","B","C"]
 winnerStart=''
@@ -192,9 +194,12 @@ friends= [  {-1} for j in range(len(BlockGraph) )]
 
 Opinions=creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
 winnerStart = getWinner (winnerVotes,typeOfVotes)
+
 startVotes = copy.deepcopy(winnerVotes)
-finals_winners_votes =[ [ 0 for i in range(2) ] for j in range(10) ]
-print(np.matrix(finals_winners_votes))
+totalFriends = 0
+for i in range(len(startVotes)) :
+    totalFriends = totalFriends + startVotes[i]
+finals_winners_votes =[ [ 0 for i in range(10) ] for j in range(2) ]
 
 votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
 votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
@@ -247,11 +252,10 @@ print()
 print("End  : ")
 print(np.matrix(changeVar))
 print(np.matrix(TotalIter))
-
+print()
+print(np.matrix(changeVar))
 print(np.matrix(finals_winners_votes))
-# מדד אחוז שינוי מנצח (מספר הפעמים שמשתנה המנצח)
-Ylabel = " Final Winner is :"
-CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
 
-#מדד אחוז מספר הקולות של המנצח בהתחלה אל מול הסוף
-# מדד הבא
+print("totalFriends = " , totalFriends)
+
+
