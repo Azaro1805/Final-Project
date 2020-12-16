@@ -42,14 +42,14 @@ def creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes):
         MostOpinions = random.choice(typeOfVotes)
         for j in range (sizes[i]):
             randomNum = random.random()
-            if(randomNum<0.4):
-                Opinions2[k] =MostOpinions
-                k=k+1
+            if(randomNum<=0.5):
+                Opinions2[k] = MostOpinions
             else:
                 typeOfVotes2 = copy.deepcopy(typeOfVotes)
                 typeOfVotes2.remove(MostOpinions)
                 Opinions2[k] = random.choice(typeOfVotes2)
-                k = k + 1
+            Countvotes(typeOfVotes, winnerVotes, Opinions2, k)
+            k = k + 1
     Opinions = copy.deepcopy(Opinions2)
     return Opinions
 
@@ -153,9 +153,9 @@ def getValue(a):
         a.remove(b)
         return  x
 max_of_iter= 6
-numberOfCom = 10
-MinPeople = 20
-MaxPeople = 30
+numberOfCom = 2
+MinPeople = 100
+MaxPeople = 100
 sizes = [ 0 for i in range(numberOfCom) ]
 probs = [ [ 0 for i in range(numberOfCom) ] for j in range(numberOfCom) ]
 MinFriendsIn = 0.4
