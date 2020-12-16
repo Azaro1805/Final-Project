@@ -97,7 +97,7 @@ def percentOfVotes(counter,typeOfVotes,votes2,threshold,Opinions,f,change):
 
 def changeOpinion(votes2,threshold,typeOfVotes,Opinions,f,h2,change):
        change = True
-       print("new opinion:", typeOfVotes[h2],"   old opinion:", Opinions[f], "  friend:",f, "   precent:",votes2[f][h2] )
+       print("new opinion:", typeOfVotes[h2],"   old opinion:", Opinions[f], "  friend:",f, "   percent:",votes2[f][h2] )
        Opinions[f]= typeOfVotes[h2]
        return change
 
@@ -159,11 +159,12 @@ change = True
 
 '''checking on different size of communities'''
 for a1 in range (xLengthGraph):
+    Clean(winnerVotes)
     numberOfCom = a1+2
     change = True
     numOfIteration=0
-    MinPeople = round(100/numberOfCom)
-    MaxPeople = round(100/numberOfCom)
+    MinPeople = round(1000/numberOfCom)-10
+    MaxPeople = round(1000/numberOfCom)+10
     print("The Round : ", a1+1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
 
     sizes = [0 for i in range(numberOfCom)]
@@ -190,11 +191,10 @@ for a1 in range (xLengthGraph):
     votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
     winnerStart = getWinner(winnerVotes, typeOfVotes)
     prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
-    Clean(winnerVotes)
 
     for x in range(len(BlockGraph)):
         Countvotes(typeOfVotes, winnerVotes, Opinions2, x)
-
+        Clean(winnerVotes)
 
     setFridends(edges, friends)
 
@@ -249,5 +249,3 @@ CreatePlotGraph (changeVar, TotalIter , "Number of Communities" , Ylabel)
 print(np.matrix(WinnerGraph))
 Ylabel= " Final Winner is :"
 CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)
-
-
