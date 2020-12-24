@@ -5,7 +5,7 @@ import random
 import numpy as np
 
 
-print ("start")
+print ("start run")
 n=2
 NumberOfChance = 10
 numberOfMembers = 1000
