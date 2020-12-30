@@ -7,50 +7,59 @@ import copy
 from collections import defaultdict
 
 '''get two arrays and return the winner name'''
-def getWinner (winnerVotes,typeOfVotes):
-    winners2 =""
-    maxVotes =0
-    for i in range (len(winnerVotes)):
-        if(maxVotes<winnerVotes[i]):
+
+
+def getWinner(winnerVotes, typeOfVotes):
+    winners2 = ""
+    maxVotes = 0
+    for i in range(len(winnerVotes)):
+        if (maxVotes < winnerVotes[i]):
             maxVotes = winnerVotes[i]
-    for i2 in range (len(winnerVotes)):
-        if( winnerVotes[i2] == maxVotes):
-            winners2=winners2 + typeOfVotes[i2]
-    return  winners2
+    for i2 in range(len(winnerVotes)):
+        if (winnerVotes[i2] == maxVotes):
+            winners2 = winners2 + typeOfVotes[i2]
+    return winners2
+
 
 '''get a friend and remove him from set'''
+
+
 def getValue(a):
     for b in a:
-        x=b
+        x = b
         a.remove(b)
         return x
 
-def probMatrix(numberOfCom,probs,MinFriendsIn,MaxFriendsIn):
-    for a in range (numberOfCom):
+
+def probMatrix(numberOfCom, probs, MinFriendsIn, MaxFriendsIn):
+    for a in range(numberOfCom):
         for b in range(numberOfCom):
-            if ( probs[a][b] == 0):
-                if(a == b):
-                    probs[a][b]= round(random.uniform(MinFriendsIn,MaxFriendsIn),2)
+            if (probs[a][b] == 0):
+                if (a == b):
+                    probs[a][b] = round(random.uniform(MinFriendsIn, MaxFriendsIn), 2)
                 else:
-                    probs[a][b] = round(random.uniform(MinFriendsOut, MaxFriendsOut),2)
+                    probs[a][b] = round(random.uniform(MinFriendsOut, MaxFriendsOut), 2)
                     probs[b][a] = probs[a][b]
+
 
 def creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes):
     for x in range(len(BlockGraph)):
         Opinions2[x] = random.choice(typeOfVotes)
-        Countvotes(typeOfVotes, winnerVotes, Opinions2,x)
+        Countvotes(typeOfVotes, winnerVotes, Opinions2, x)
     Opinions = copy.deepcopy(Opinions2)
     return Opinions
 
-def createCom (numberOfCom,MinPeople, MaxPeople):
+
+def createCom(numberOfCom, MinPeople, MaxPeople):
     for i in range(numberOfCom):
         sizes[i] = random.randint(MinPeople, MaxPeople)
 
-def Countvotes(typeOfVotes, winnerVotes, Opinions2,x):
 
+def Countvotes(typeOfVotes, winnerVotes, Opinions2, x):
     for i3 in range(len(typeOfVotes)):
         if (Opinions2[x] == typeOfVotes[i3]):
             winnerVotes[i3] = (winnerVotes[i3] + 1)
+
 
 def setFridends(edges, friends):
     '''pair=(1,2),friend[1]={2}'''
@@ -59,22 +68,24 @@ def setFridends(edges, friends):
         friends[pair[0]].add(pair[1])
         friends[pair[1]].add(pair[0])
 
+
 def runInit(friends, votes, votes2):
     friends2 = copy.deepcopy(friends)
     CleanDouble(votes)
     CleanDouble(votes2)
     return friends2
 
-def countMyOpinion(typeOfVotes, Opinions, votes, counter,f):
 
+def countMyOpinion(typeOfVotes, Opinions, votes, counter, f):
     for h1 in range(len(typeOfVotes)):
         if (Opinions[f] == typeOfVotes[h1]):
             votes[f][h1] = (votes[f][h1] + 2)
             counter = counter + 2
             return counter
 
-def countFriendsOpinion(typeOfVotes, Opinions, votes, counter,f):
-    if (len(friends2[f]) == 0 ):
+
+def countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f):
+    if (len(friends2[f]) == 0):
         return counter
     set = friends2[f]
     for g in range(len(set)):
@@ -85,96 +96,142 @@ def countFriendsOpinion(typeOfVotes, Opinions, votes, counter,f):
                 counter = counter + 1
     return counter
 
-def percentOfVotes(counter,typeOfVotes,votes2,threshold,Opinions,f,change):
-    if (counter>0):
+
+def percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change):
+    if (counter > 0):
         for h2 in range(len(typeOfVotes)):
-            allVote=votes[f][h2]
-            votes2[f][h2]=round(allVote/counter,2)
+            allVote = votes[f][h2]
+            votes2[f][h2] = round(allVote / counter, 2)
             '''need to change opinion if A != B , percent > threshold'''
             if (votes2[f][h2] >= threshold and typeOfVotes[h2] != Opinions[f]):
                 change = changeOpinion(votes2, threshold, typeOfVotes, Opinions, f, h2, change)
                 return change
     return change
 
-def changeOpinion(votes2,threshold,typeOfVotes,Opinions,f,h2,change):
-       change = True
-       #print("new opinion:", typeOfVotes[h2],"   old opinion:", Opinions[f], "  friend:",f, "   precent:",votes2[f][h2] )
-       Opinions[f]= typeOfVotes[h2]
-       return change
+
+def changeOpinion(votes2, threshold, typeOfVotes, Opinions, f, h2, change):
+    change = True
+    # print("new opinion:", typeOfVotes[h2],"   old opinion:", Opinions[f], "  friend:",f, "   precent:",votes2[f][h2] )
+    Opinions[f] = typeOfVotes[h2]
+    return change
+
 
 def CleanDouble(array):
-    for i in range (len(array)):
+    for i in range(len(array)):
         for j in range(len(array[0])):
-            array[i][j]=0
+            array[i][j] = 0
+
 
 def Clean(array):
-    for i in range (len(array)):
+    for i in range(len(array)):
         array[i] = 0
 
-def CreatePlotGraph (changeVar, TotalIter , Xlegend , Ylabel):
+
+def CreatePlotGraph(changeVar, TotalIter, Xlegend, Ylabel):
     dataPlot = plt.plot(changeVar, TotalIter, label='linear')
     plt.xlabel(Xlegend)
     plt.ylabel(Ylabel)
     plt.legend()
     plt.show()
 
-def CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel):
-    plt.scatter(changeVar,WinnerGraph,label = ("The Start Winner is: "+ winnerStart) )
+
+def CreatescatterGraph(changeVar, WinnerGraph, Xlegend, Ylabel):
+    plt.scatter(changeVar, WinnerGraph, label=("The Start Winner is: " + winnerStart))
     plt.xlabel(Xlegend)
     plt.ylabel(Ylabel)
     plt.legend()
     plt.show()
 
-def prints (typeOfVotes, winnerVotes, winnerStart, Opinions2, edges):
+
+def prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges):
     print("Start votes")
     print(np.matrix(typeOfVotes))
     print(np.matrix(winnerVotes))
-    print("Start winner is:",winnerStart)
-    #print(" opinions:")
-    #print (Opinions2 )
-    #print("edges :")
-    #print(edges)
+    print("Start winner is:", winnerStart)
+    # print(" opinions:")
+    # print (Opinions2 )
+    # print("edges :")
+    # print(edges)
+
+def calculate_winner_to_graph(start_winner_graph, end_winner_graph, winner_per_graph ,num_vote ,seedi , a1):
+    winnerEnd = getWinner(end_winner_graph, typeOfVotes)
+    precente = 0
+    if (winnerEnd == "A"):
+        precente=end_winner_graph[0]-start_winner_graph[0]
+    if (winnerEnd == "B"):
+        precente = end_winner_graph[1] - start_winner_graph[1]
+    if (winnerEnd == "C"):
+        precente = end_winner_graph[2] - start_winner_graph[2]
+    if (winnerEnd == "D"):
+        precente = end_winner_graph[2] - start_winner_graph[2]
+    if (winnerEnd == "E"):
+        precente = end_winner_graph[2] - start_winner_graph[2]
+    if (winnerEnd == "F"):
+        precente = end_winner_graph[2] - start_winner_graph[2]
+    precente = abs(precente/num_vote)
+    #print(precente)
+    winner_per_graph[seedi][a1] = precente
+
+def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph, winner_change_graph ,seedi , a1):
+    winnerEnd = getWinner(end_winner_graph, typeOfVotes)
+    if (winnerEnd == start_change_winner_graph):
+        winner_change_graph[seedi][a1] = 0
+    else:
+        winner_change_graph[seedi][a1] = 1
+
 
 def getValue(a):
     for b in a:
-        x=b
+        x = b
         a.remove(b)
-        return  x
+        return x
 
-max_of_iter= 10
+number_of_seeds = 50
+max_of_iter = 10
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.7
 MinFriendsOut = 0.1
 MaxFriendsOut = 0.3
 threshold = 0.5
-typeOfVotes=["A","B","C"]
-winnerStart=''
-winnerFinal=''
-xLengthGraph= 10
+typeOfVotes = ["A", "B", "C"]
+winnerStart = ''
+winnerFinal = ''
+xLengthGraph = 10
 Xlegend = "Number of friends"
-TotalIter = [0 for a3 in range (xLengthGraph)]
-changeVar = [0 for a4 in range (xLengthGraph)]
+TotalIter = [0 for a3 in range(xLengthGraph)]
+changeVar = [0 for a4 in range(xLengthGraph)]
 numberOfCom = 0
-WinnerGraph = [ "" for j in range(xLengthGraph)]
+WinnerGraph = ["" for j in range(xLengthGraph)]
 Opinions2 = {}
-winnerVotes= [0 for i2 in range(len(typeOfVotes))]
+winnerVotes = [0 for i2 in range(len(typeOfVotes))]
 change = True
 
+GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+GarphIter_avg = [0 for j in range(xLengthGraph)]
+
+start_winner_graph = [0 for j in range(len(typeOfVotes))]
+winner_per_graph = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+winner_per_graph_avg = [0 for j in range(xLengthGraph)]
+
+start_change_winner_graph = "T"
+winner_change_graph = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+winner_change_graph_avg = [0 for j in range(xLengthGraph)]
+
 '''checking on different size of communities'''
-for seedi in range(10):
-    seede= 363+ seedi*140
+for seedi in range(number_of_seeds):
+    seede = 363 + seedi * 140
     random.seed(seede)
-    print( "######################### next seed , the seed is ", seede , "#################")
+    print("######################### next seed , the seed is ", seede, "#################")
     Clean(winnerVotes)
 
-    for a1 in range (xLengthGraph):
+    for a1 in range(xLengthGraph):
         Clean(winnerVotes)
-        numberOfCom = a1+2
+        numberOfCom = a1 + 2
         change = True
-        numOfIteration=0
-        MinPeople = round(500/numberOfCom)-10
-        MaxPeople = round(500/numberOfCom)+10
-        print("The Round : ", a1+1, "the", Xlegend, " min  : ", MinPeople,  " max  : ", MaxPeople)
+        numOfIteration = 0
+        MinPeople = round(100 / numberOfCom) - 8
+        MaxPeople = round(100 / numberOfCom) + 8
+        print("The Round : ", a1 + 1, "the", Xlegend, " min  : ", MinPeople, " max  : ", MaxPeople)
 
         sizes = [0 for i in range(numberOfCom)]
         probs = [[0 for i in range(numberOfCom)] for j in range(numberOfCom)]
@@ -189,44 +246,46 @@ for seedi in range(10):
         print("size of Coum :")
         print(sizes)
 
-      #  print("probs :")
-     #   print(np.matrix(probs))
+        #  print("probs :")
+        #   print(np.matrix(probs))
 
         BlockGraph = nx.stochastic_block_model(sizes, probs, seed=seede)
         edges = nx.edges(BlockGraph)
         friends = [set() for j in range(len(BlockGraph))]
-        Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
+        Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes)
         votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
         votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
+        #פה
         winnerStart = getWinner(winnerVotes, typeOfVotes)
+        start_change_winner_graph = copy.deepcopy(winnerStart)
         prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
-
+        start_winner_graph = copy.deepcopy(winnerVotes)
         for x in range(len(BlockGraph)):
             Countvotes(typeOfVotes, winnerVotes, Opinions2, x)
             Clean(winnerVotes)
 
         setFridends(edges, friends)
 
-     #   print("friends :")
-      #  print(friends)
+        #   print("friends :")
+        #  print(friends)
 
-        while(change):
+        while (change):
             if (max_of_iter == numOfIteration):
                 print("break while")
                 break
             friends2 = runInit(friends, votes, votes2)
-            #winnerStart = getWinner(winnerVotes, typeOfVotes)
+            # winnerStart = getWinner(winnerVotes, typeOfVotes)
             numOfIteration = numOfIteration + 1
-            print( "numOfIteration is : " , numOfIteration)
+            print("numOfIteration is : ", numOfIteration)
             change = False
 
             for f in range(len(friends)):
-                counter=0
+                counter = 0
                 counter = countMyOpinion(typeOfVotes, Opinions, votes, counter, f)
                 counter = countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f)
                 change = percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change)
 
-      #  print(np.matrix(Opinions))
+        #  print(np.matrix(Opinions))
         Clean(winnerVotes)
         for x1 in range(len(BlockGraph)):
             Countvotes(typeOfVotes, winnerVotes, Opinions, x1)
@@ -234,8 +293,8 @@ for seedi in range(10):
         print("final votes")
         print(np.matrix(typeOfVotes))
         print(np.matrix(winnerVotes))
-        WinnerGraph[a1] = getWinner(winnerVotes,typeOfVotes)
-        print("Final winner is:",WinnerGraph[a1])
+        WinnerGraph[a1] = getWinner(winnerVotes, typeOfVotes)
+        print("Final winner is:", WinnerGraph[a1])
 
         '''print(np.matrix(votes))
         print()
@@ -247,17 +306,69 @@ for seedi in range(10):
         '''plt.show(nx.draw(BlockGraph , pos = nx.spring_layout(BlockGraph)))'''
         print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Next Round XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         print()
+        calculate_winner_to_graph(start_winner_graph, winnerVotes, winner_per_graph, len(BlockGraph), seedi, a1)
+        calculate_winner_change_to_graph(start_change_winner_graph, winnerVotes, winner_change_graph, seedi, a1)
 
+    for i in range(len(TotalIter)):
+        GarphIter[seedi][i] = TotalIter[i]
+    #print(np.matrix(probs))
     print()
     print("End  : ")
-    #print(np.matrix(changeVar))
+    # print(np.matrix(changeVar))
     print(np.matrix(TotalIter))
 
-    '''# Threshold plot
-    Ylabel= "Number of Iterations"
-    CreatePlotGraph (changeVar, TotalIter , "Number of Communities" , Ylabel)
-    
-    # Winner Plot
-    print(np.matrix(WinnerGraph))
-    Ylabel= " Final Winner is :"
-    CreatescatterGraph (changeVar, WinnerGraph , Xlegend , Ylabel)'''
+
+# Number of Iterations VS number of com plot
+print("Number of Iterations VS number of com plot")
+print(np.matrix(GarphIter))
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        GarphIter_avg[j] = GarphIter_avg[j] + GarphIter[i][j]
+
+print(np.matrix(GarphIter_avg))
+
+for i in range(len(TotalIter)):
+    GarphIter_avg[i] = round(GarphIter_avg[i]/number_of_seeds,3)
+
+print(np.matrix(GarphIter_avg))
+
+Ylabel= "Number of Iterations"
+CreatePlotGraph (changeVar, GarphIter_avg , "Number of Communities" , Ylabel)
+
+
+# Winner Present Votes VS number of com plot
+print("Winner Present Votes VS number of com plot")
+print(np.matrix(winner_per_graph))
+
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        winner_per_graph_avg[j] = winner_per_graph_avg[j] + winner_per_graph[i][j]
+print()
+print(np.matrix(winner_per_graph_avg))
+
+for i in range(len(TotalIter)):
+    winner_per_graph_avg[i] = round(winner_per_graph_avg[i]/number_of_seeds,3)
+print()
+print(np.matrix(winner_per_graph_avg))
+
+
+Ylabel= "Diff Between Start to End Present Winner Votes"
+CreatePlotGraph (changeVar, winner_per_graph_avg , "Number of Communities" , Ylabel)
+
+# Winner change VS number of com plot
+print("Winner change VS number of com plot")
+print(np.matrix(winner_change_graph))
+
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        winner_change_graph_avg[j] = winner_change_graph_avg[j] + winner_change_graph[i][j]
+
+print(np.matrix(GarphIter_avg))
+
+for i in range(len(TotalIter)):
+    winner_change_graph_avg[i] = round(winner_change_graph_avg[i]/number_of_seeds,3)
+
+print(np.matrix(winner_change_graph_avg))
+
+Ylabel= "Winner change in %"
+CreatePlotGraph (changeVar, winner_change_graph_avg , "Number of Communities" , Ylabel)
