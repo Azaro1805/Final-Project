@@ -194,7 +194,7 @@ def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph
     else:
         winner_change_graph[seedi][a1] = 1
 
-number_of_seeds = 20
+number_of_seeds = 50
 max_of_iter= 10
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.7

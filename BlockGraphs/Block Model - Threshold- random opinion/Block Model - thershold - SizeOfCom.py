@@ -229,8 +229,8 @@ for seedi in range(number_of_seeds):
         numberOfCom = a1 + 2
         change = True
         numOfIteration = 0
-        MinPeople = round(100 / numberOfCom) - 8
-        MaxPeople = round(100 / numberOfCom) + 8
+        MinPeople = round(100 / numberOfCom) - 5
+        MaxPeople = round(100 / numberOfCom) + 5
         print("The Round : ", a1 + 1, "the", Xlegend, " min  : ", MinPeople, " max  : ", MaxPeople)
 
         sizes = [0 for i in range(numberOfCom)]

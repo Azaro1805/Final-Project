@@ -239,8 +239,8 @@ for seedi in range(number_of_seeds):
         numberOfCom = a1 + 2
         change = True
         numOfIteration = 0
-        MinPeople = round(100 / numberOfCom) - 8
-        MaxPeople = round(100 / numberOfCom) + 8
+        MinPeople = round(100 / numberOfCom) - 5
+        MaxPeople = round(100 / numberOfCom) + 5
         print("The Round : ", a1 + 1, "the", Xlegend, " min  : ", MinPeople, " max  : ", MaxPeople)
 
         sizes = [0 for i in range(numberOfCom)]
@@ -265,7 +265,6 @@ for seedi in range(number_of_seeds):
         Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes)
         votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
         votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
-        #פה
         winnerStart = getWinner(winnerVotes, typeOfVotes)
         start_change_winner_graph = copy.deepcopy(winnerStart)
         prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
