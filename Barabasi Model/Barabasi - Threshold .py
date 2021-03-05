@@ -143,8 +143,9 @@ def calculate_winner_to_graph(start_winner_graph, end_winner_graph, winner_per_g
         precente = end_winner_graph[2] - start_winner_graph[2]
     if (winnerEnd == "F"):
         precente = end_winner_graph[2] - start_winner_graph[2]
+    print("precente = ", precente , "num_vote = " , num_vote )
     precente = abs(precente/num_vote)
-    #print(precente)
+    print(precente)
     winner_per_graph[seedi][a1] = precente
 
 def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph, winner_change_graph ,seedi , a1):
@@ -172,81 +173,153 @@ changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
 Opinions2={}
+number_of_seeds = 50
 
+GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+GarphIter_avg = [0 for j in range(xLengthGraph)]
 
-barabasiGraph = barabasi_albert_graph(9, 4, seed=364)
-#  מתחיל לייצר קשתות רק כאשר יש לו אמ קודקודים ברשת
-# (n-m)m = edge
+start_winner_graph = [0 for j in range(len(typeOfVotes))]
+winner_per_graph = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+winner_per_graph_avg = [0 for j in range(xLengthGraph)]
 
-#BlockGraph = extended_barabasi_albert_graph(5, 2, 0.1, 0.1, seed=364)
-# extended_barabasi_albert_graph(n, m, p, q, seed=None)
-# n = number of nodes (friends)
-# m = number of arcs for new friend, לאחרון יש בדיוק אמ קשתות לכל השאר יותר
-# p = הסתברות להוספת קשת לחברים הקיימים מול החבר החדש
-# q = ההסתברות שקשת תשנה את חברים אליה היא מחוברת
+start_change_winner_graph = "T"
+winner_change_graph = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
+winner_change_graph_avg = [0 for j in range(xLengthGraph)]
 
-#print(BlockGraph)
-edges = nx.edges(barabasiGraph)
-print(edges)
-friends = [set() for j in range(len(barabasiGraph))]
-#[(0, 2), (0, 3), (0, 1), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4)]
-
-Opinions=creatOpinions(barabasiGraph, typeOfVotes, Opinions2, winnerVotes)
-print(np.matrix(Opinions))
-
-winnerStart = getWinner (winnerVotes,typeOfVotes)
-
-votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
-votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
-start_change_winner_graph = copy.deepcopy(winnerStart)
-start_winner_graph = copy.deepcopy(winnerVotes)
-prints (typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
-
-setFridends(edges, friends)
-
-for a1 in range(xLengthGraph):
-    threshold = 0.35 + a1 / 20
-    changeVar[a1] = threshold
-    Opinions = copy.deepcopy(Opinions2)
-    print()
-    print("The Round : ", a1 + 1, "the", Xlegend, "is : ", threshold)
-    change = True
-    numOfIteration = 0
-    while (change):
-        if (max_of_iter == numOfIteration):
-            print("break while")
-            break
-        friends2 = runInit(friends, votes, votes2)
-        numOfIteration = numOfIteration + 1
-        print("numOfIteration is : ", numOfIteration)
-        change = False
-
-        for f in range(len(friends)):
-            counter = 0
-            counter = countMyOpinion(typeOfVotes, Opinions, votes, counter, f)
-            counter = countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f)
-            change = percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change)
-
+for seedi in range(number_of_seeds):
+    seede= 363+ seedi*140
+    random.seed(seede)
+    print( "######################### next seed , the seed is ", seede , "#################")
     Clean(winnerVotes)
-    for x1 in range(len(barabasiGraph)):
-        Countvotes(typeOfVotes, winnerVotes, Opinions, x1)
 
-    WinnerGraph[a1] = getWinner(winnerVotes, typeOfVotes)
+    barabasiGraph = barabasi_albert_graph(300,10, seed=seede)
+    #  מתחיל לייצר קשתות רק כאשר יש לו אמ קודקודים ברשת
+    # (n-m)m = edge
 
-    print("final votes")
-    print(np.matrix(typeOfVotes))
-    print(np.matrix(winnerVotes))
-    print("Final Winner is:", WinnerGraph[a1])
+    # BlockGraph = extended_barabasi_albert_graph(5, 2, 0.1, 0.1, seed=364)
+    # extended_barabasi_albert_graph(n, m, p, q, seed=None)
+    # n = number of nodes (friends)
+    # m = number of arcs for new friend, לאחרון יש בדיוק אמ קשתות לכל השאר יותר
+    # p = הסתברות להוספת קשת לחברים הקיימים מול החבר החדש
+    # q = ההסתברות שקשת תשנה את חברים אליה היא מחוברת
 
-    TotalIter[a1] = numOfIteration
-    '''print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Next Round XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    # print(BlockGraph)
+    edges = nx.edges(barabasiGraph)
+    #print(edges)
+    friends = [set() for j in range(len(barabasiGraph))]
+    # [(0, 2), (0, 3), (0, 1), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4)]
+
+    Opinions = creatOpinions(barabasiGraph, typeOfVotes, Opinions2, winnerVotes)
+    #print(np.matrix(Opinions))
+
+    winnerStart = getWinner(winnerVotes, typeOfVotes)
+
+    votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
+    votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
+    start_change_winner_graph = copy.deepcopy(winnerStart)
+    start_winner_graph = copy.deepcopy(winnerVotes)
+    prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
+
+    setFridends(edges, friends)
+
+
+    for a1 in range(xLengthGraph):
+        threshold = 0.35 + a1 / 20
+        changeVar[a1] = threshold
+        Opinions = copy.deepcopy(Opinions2)
+        print()
+        print("The Round : ", a1 + 1, "the", Xlegend, "is : ", threshold)
+        change = True
+        numOfIteration = 0
+        while (change):
+            if (max_of_iter == numOfIteration):
+                print("break while")
+                break
+            friends2 = runInit(friends, votes, votes2)
+            numOfIteration = numOfIteration + 1
+            print("numOfIteration is : ", numOfIteration)
+            change = False
+
+            for f in range(len(friends)):
+                counter = 0
+                counter = countMyOpinion(typeOfVotes, Opinions, votes, counter, f)
+                counter = countFriendsOpinion(typeOfVotes, Opinions, votes, counter, f)
+                change = percentOfVotes(counter, typeOfVotes, votes2, threshold, Opinions, f, change)
+
+        Clean(winnerVotes)
+        for x1 in range(len(barabasiGraph)):
+            Countvotes(typeOfVotes, winnerVotes, Opinions, x1)
+
+        WinnerGraph[a1] = getWinner(winnerVotes, typeOfVotes)
+
+        print("final votes")
+        print(np.matrix(typeOfVotes))
+        print(np.matrix(winnerVotes))
+        print("Final Winner is:", WinnerGraph[a1])
+
+        TotalIter[a1] = numOfIteration
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Next Round XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        print()
+        calculate_winner_to_graph(start_winner_graph, winnerVotes, winner_per_graph, len(barabasiGraph), seedi, a1)
+        calculate_winner_change_to_graph(start_change_winner_graph, winnerVotes, winner_change_graph, seedi, a1)
+
+    for i in range(len(TotalIter)):
+        GarphIter[seedi][i] = TotalIter[i]
     print()
-    calculate_winner_to_graph(start_winner_graph, winnerVotes, winner_per_graph, len(BlockGraph), seedi, a1)
-    calculate_winner_change_to_graph(start_change_winner_graph, winnerVotes, winner_change_graph, seedi, a1)
+    print("End  : ")
+    print(np.matrix(changeVar))
+    print(np.matrix(TotalIter))
+
+# Number of Iterations
+print("Number of Iterations")
+print(np.matrix(GarphIter))
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        GarphIter_avg[j] = GarphIter_avg[j] + GarphIter[i][j]
+
+print(np.matrix(GarphIter_avg))
 
 for i in range(len(TotalIter)):
-    GarphIter[seedi][i] = TotalIter[i]'''
+    GarphIter_avg[i] = round(GarphIter_avg[i]/number_of_seeds,3)
+
+print(np.matrix(GarphIter_avg))
+
+Ylabel= "Number of Iterations"
+CreatePlotGraph (changeVar, GarphIter_avg , "Thershold" , Ylabel)
+
+# Winner Present Votes
+print("Winner Present Votes ")
+print(np.matrix(winner_per_graph))
+
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        winner_per_graph_avg[j] = winner_per_graph_avg[j] + winner_per_graph[i][j]
 print()
-print("End  : ")
-print(np.matrix(changeVar))
-print(np.matrix(TotalIter))
+print(np.matrix(winner_per_graph_avg))
+
+for i in range(len(TotalIter)):
+    winner_per_graph_avg[i] = round(winner_per_graph_avg[i]/number_of_seeds,3)
+print()
+print(np.matrix(winner_per_graph_avg))
+
+
+Ylabel= "Diff Between Start to End Present Winner Votes"
+CreatePlotGraph (changeVar, winner_per_graph_avg , "Thershold" , Ylabel)
+
+# Winner change
+print("Winner change ")
+print(np.matrix(winner_change_graph))
+
+for i in range (number_of_seeds):
+    for j in range(len(TotalIter)):
+        winner_change_graph_avg[j] = winner_change_graph_avg[j] + winner_change_graph[i][j]
+
+print(np.matrix(GarphIter_avg))
+
+for i in range(len(TotalIter)):
+    winner_change_graph_avg[i] = round(winner_change_graph_avg[i]/number_of_seeds,3)
+
+print(np.matrix(winner_change_graph_avg))
+
+Ylabel= "Winner change in %"
+CreatePlotGraph (changeVar, winner_change_graph_avg , "Thershold" , Ylabel)
