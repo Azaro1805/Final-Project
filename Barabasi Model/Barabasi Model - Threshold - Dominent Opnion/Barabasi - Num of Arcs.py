@@ -26,20 +26,19 @@ def getValue(a):
         a.remove(b)
         return x
 
-def creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes):
+def creatOpinions(barabasiGraph, typeOfVotes, Opinions2, winnerVotes):
     k=0
-    for i in range(len(sizes)):
-        MostOpinions = random.choice(typeOfVotes)
-        for j in range (sizes[i]):
-            randomNum = random.random()
-            if(randomNum<=0.5):
-                Opinions2[k] = MostOpinions
-            else:
-                typeOfVotes2 = copy.deepcopy(typeOfVotes)
-                typeOfVotes2.remove(MostOpinions)
-                Opinions2[k] = random.choice(typeOfVotes2)
-            Countvotes(typeOfVotes, winnerVotes, Opinions2, k)
-            k = k + 1
+    MostOpinions = random.choice(typeOfVotes)
+    for j in range (len(barabasiGraph)):
+        randomNum = random.random()
+        if(randomNum<=0.5):
+            Opinions2[k] = MostOpinions
+        else:
+            typeOfVotes2 = copy.deepcopy(typeOfVotes)
+            typeOfVotes2.remove(MostOpinions)
+            Opinions2[k] = random.choice(typeOfVotes2)
+        Countvotes(typeOfVotes, winnerVotes, Opinions2, k)
+        k = k + 1
     Opinions = copy.deepcopy(Opinions2)
     return Opinions
 
@@ -183,7 +182,7 @@ changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
 Opinions2={}
-number_of_seeds = 50
+number_of_seeds = 2
 threshold = 0.5
 
 GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
