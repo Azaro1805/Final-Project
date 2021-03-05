@@ -35,20 +35,10 @@ def probMatrix(numberOfCom,probs,MinFriendsIn,MaxFriendsIn):
                     probs[a][b] = round(random.uniform(MinFriendsOut, MaxFriendsOut),2)
                     probs[b][a] = probs[a][b]
 
-def creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes):
-    k=0
-    for i in range(len(sizes)):
-        MostOpinions = random.choice(typeOfVotes)
-        for j in range (sizes[i]):
-            randomNum = random.random()
-            if(randomNum<=0.5):
-                Opinions2[k] = MostOpinions
-            else:
-                typeOfVotes2 = copy.deepcopy(typeOfVotes)
-                typeOfVotes2.remove(MostOpinions)
-                Opinions2[k] = random.choice(typeOfVotes2)
-            Countvotes(typeOfVotes, winnerVotes, Opinions2, k)
-            k = k + 1
+def creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes):
+    for x in range(len(BlockGraph)):
+        Opinions2[x] = random.choice(typeOfVotes)
+        Countvotes(typeOfVotes, winnerVotes, Opinions2,x)
     Opinions = copy.deepcopy(Opinions2)
     return Opinions
 
@@ -211,7 +201,7 @@ numberOfCom = 0
 WinnerGraph = [ "" for j in range(xLengthGraph)]
 Opinions2 = {}
 change = True
-numberOfCom = 5
+numberOfCom = 10
 MinPeople = 20
 MaxPeople = 25
 
@@ -258,7 +248,7 @@ for seedi in range(number_of_seeds):
         winnerVotes = [0 for i2 in range(len(typeOfVotes))]
         changeVar[a1] = len(typeOfVotes)
 
-        Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes, sizes)
+        Opinions = creatOpinions(BlockGraph, typeOfVotes, Opinions2, winnerVotes)
         votes = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
         votes2 = [[0 for i in range(len(typeOfVotes))] for j in range(len(friends))]
         winnerStart = getWinner(winnerVotes, typeOfVotes)
