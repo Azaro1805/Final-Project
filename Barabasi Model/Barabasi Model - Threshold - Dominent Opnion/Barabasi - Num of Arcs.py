@@ -182,7 +182,7 @@ changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
 Opinions2={}
-number_of_seeds = 2
+number_of_seeds = 50
 threshold = 0.5
 
 GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
