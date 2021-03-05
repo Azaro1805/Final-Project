@@ -143,9 +143,9 @@ def calculate_winner_to_graph(start_winner_graph, end_winner_graph, winner_per_g
         precente = end_winner_graph[2] - start_winner_graph[2]
     if (winnerEnd == "F"):
         precente = end_winner_graph[2] - start_winner_graph[2]
-    print("precente = ", precente , "num_vote = " , num_vote )
+    #print("precente = ", precente , "num_vote = " , num_vote )
     precente = abs(precente/num_vote)
-    print(precente)
+    #print(precente)
     winner_per_graph[seedi][a1] = precente
 
 def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph, winner_change_graph ,seedi , a1):
