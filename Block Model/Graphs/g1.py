@@ -94,4 +94,53 @@ Ylabel= "Winner change in %"
 
 GarphIter_avg = [3.58, 3.6,  3.88, 3.36, 3.2,  2.98, 3.26, 3.22, 3.08, 2.74]
 Ylabel= "Number of Iterations"
-CreatePlotGraph (changeVar, GarphIter_avg , "Number of Communities" , Ylabel, 1,5,1,12)
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Communities" , Ylabel, 1,5,1,12)
+
+#################################################################################################
+#########################################barbasi#################################################
+
+GarphIter_avg = [0.2 , 0.2 , 0.18, 0.1 , 0.12]
+changeVar = [2,3,4,5,6]
+Ylabel= "Winner change in %"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Opinions" , Ylabel, 0,0.4,2,6)
+
+GarphIter_avg = [3.16 ,3.42 ,2.24 ,1.96 ,1.6 ]
+changeVar = [2,3,4,5,6]
+Ylabel= "Number of Iterations"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Opinions" , Ylabel, 1,4,2,6)
+
+#################################################################################################
+
+
+GarphIter_avg = [3.32 ,3.2 , 3.32 ,3.4 , 3.72 ,3.66 ,3.62 ,3.46, 3.72, 3.42]
+changeVar = [50 , 75 ,100 ,125, 150, 175, 200 ,225 ,250, 275]
+Ylabel= "Number of Iterations"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Friends" , Ylabel, 2,5,50,275)
+
+
+GarphIter_avg = [0.16, 0.36 ,0.24, 0.08, 0.22 ,0.28 ,0.24, 0.34, 0.24, 0.4]
+changeVar = [50 , 75 ,100 ,125, 150, 175, 200 ,225 ,250, 275]
+Ylabel= "Winner change in %"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Friends" , Ylabel, 0,0.6,50,275)
+
+GarphIter_avg = [0.343 ,0.272 ,0.251 ,0.216 ,0.27  ,0.215 ,0.219 ,0.186 ,0.143 ,0.154]
+changeVar = [50 , 75 ,100 ,125, 150, 175, 200 ,225 ,250, 275]
+Ylabel= "Diff Between Start to End Present Winner Votes"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Friends" , Ylabel, 0.1,0.5,50,275)
+
+############################################################################
+
+GarphIter_avg = [2.02 ,2.26, 2.72 ,3.24 ,3.54, 3.56 ,3.84 ,3.76, 3.66, 3.54]
+changeVar = [ 1 , 2  ,3  ,4  ,5  ,6  ,7 , 8 , 9 , 10]
+Ylabel= "Number of Iterations"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Arcs" , Ylabel, 1,5,1,10)
+
+GarphIter_avg = [0.26 ,0.34 ,0.28 ,0.3  ,0.38, 0.34, 0.28, 0.2 , 0.42 ,0.32]
+changeVar = [ 1 , 2  ,3  ,4  ,5  ,6  ,7 , 8 , 9 , 10]
+Ylabel= "Winner change in %"
+#CreatePlotGraph (changeVar, GarphIter_avg , "Number of Arcs" , Ylabel, 0.1,0.5,1,10)
+
+GarphIter_avg = [0.012, 0.046, 0.037, 0.078, 0.097, 0.118, 0.13,  0.188, 0.122, 0.14 ]
+changeVar = [ 1 , 2  ,3  ,4  ,5  ,6  ,7 , 8 , 9 , 10]
+Ylabel= "Diff Between Start to End Present Winner Votes"
+CreatePlotGraph (changeVar, GarphIter_avg , "Number of Arcs" , Ylabel, 0,0.25,1,10)
