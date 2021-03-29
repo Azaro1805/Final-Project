@@ -193,7 +193,7 @@ typeOfVotes=["A","B","C"]
 winnerStart=''
 winnerFinal=''
 xLengthGraph = 10
-Xlegend = "number of arcs"
+Xlegend = "number of friends"
 TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
@@ -248,7 +248,7 @@ for seedi in range(number_of_seeds):
 
         changeVar[a1] = num_of_Friends
         print()
-        print("The Round : ", a1 + 1, "the", Xlegend, "is : ", num_of_Arcs)
+        print("The Round : ", a1 + 1, "the", Xlegend, "is : ", changeVar[a1])
         prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
         setFridends(edges, friends)
         #print("friends[171] = ", friends[171])
