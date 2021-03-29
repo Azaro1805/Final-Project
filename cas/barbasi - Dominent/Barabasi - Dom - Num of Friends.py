@@ -199,8 +199,10 @@ changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
 Opinions2={}
-number_of_seeds = 2
+number_of_seeds = 1
 blocked = set()
+num_of_Arcs = 10
+
 
 GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
 GarphIter_avg = [0 for j in range(xLengthGraph)]
@@ -223,8 +225,8 @@ for seedi in range(number_of_seeds):
     for a1 in range(xLengthGraph):
         Clean(winnerVotes)
 
-        num_of_Arcs = 4+(1*a1)
-        barabasiGraph = barabasi_albert_graph(300, num_of_Arcs, seed=seede)
+        num_of_Friends = 300+(50*a1) #300-800 friends
+        barabasiGraph = barabasi_albert_graph(num_of_Friends, num_of_Arcs, seed=seede)
         #  מתחיל לייצר קשתות רק כאשר יש לו אמ קודקודים ברשת
         # (n-m)m = edge
 
@@ -244,7 +246,7 @@ for seedi in range(number_of_seeds):
         start_winner_graph = copy.deepcopy(winnerVotes)
         Opinions = copy.deepcopy(Opinions2)
 
-        changeVar[a1] = num_of_Arcs
+        changeVar[a1] = num_of_Friends
         print()
         print("The Round : ", a1 + 1, "the", Xlegend, "is : ", num_of_Arcs)
         prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
@@ -316,7 +318,7 @@ for i in range(len(TotalIter)):
 print(np.matrix(GarphIter_avg))
 
 Ylabel= "Number of Changes Opinions"
-CreatePlotGraph (changeVar, GarphIter_avg , "Number of Arcs" , Ylabel)
+CreatePlotGraph (changeVar, GarphIter_avg , "Number of Friends" , Ylabel)
 
 # Winner Present Votes
 print()
@@ -336,7 +338,7 @@ print(np.matrix(winner_per_graph_avg))
 
 
 Ylabel= "Diff Between Start to End Present Winner Votes"
-CreatePlotGraph (changeVar, winner_per_graph_avg , "Number of Arcs" , Ylabel)
+CreatePlotGraph (changeVar, winner_per_graph_avg , "Number of Friends" , Ylabel)
 
 # Winner change
 print()
@@ -355,4 +357,4 @@ for i in range(len(TotalIter)):
 print(np.matrix(winner_change_graph_avg))
 
 Ylabel= "Winner change in %"
-CreatePlotGraph (changeVar, winner_change_graph_avg , "Number of Arcs" , Ylabel)
+CreatePlotGraph (changeVar, winner_change_graph_avg , "Number of Friends" , Ylabel)
