@@ -309,8 +309,7 @@ for seedi in range(number_of_seeds):
 print()
 print("Number of Changes Opinions")
 print(np.matrix(GarphIter))
-box_lists = list()
-box_lists_sparate = list()
+
 
 
 
@@ -318,8 +317,10 @@ box_lists_sparate = list()
 
 # Number of Changes Opinions graph
 
-print()
 # box plots graph
+print()
+box_lists = list()
+box_lists_sparate = list()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
         box_lists_sparate.append(GarphIter[i][j])
@@ -350,10 +351,10 @@ print(np.matrix(GarphIter_avg))
 Ylabel= "Number of Changes Opinions"
 CreatePlotGraph (changeVar, GarphIter_avg , "Number of Arcs" , Ylabel)
 
-cor1 = scipy.stats.pearsonr(changeVar, GarphIter_avg)[0]
 
 
 # Winner Present Votes
+
 #boxplot
 box_lists_sparate.clear()
 box_lists.clear()
@@ -393,7 +394,6 @@ print(np.matrix(winner_per_graph_avg))
 Ylabel= "Diff Between Start to End Present Winner Votes"
 CreatePlotGraph (changeVar, winner_per_graph_avg , "Number of Arcs" , Ylabel)
 
-cor2 = scipy.stats.pearsonr(changeVar, winner_per_graph_avg)[0]
 
 
 # Winner change
@@ -416,10 +416,12 @@ print(np.matrix(winner_change_graph_avg))
 Ylabel= "Winner change in %"
 CreatePlotGraph (changeVar, winner_change_graph_avg , "Number of Arcs" , Ylabel)
 
-cor3 = scipy.stats.pearsonr(changeVar, winner_change_graph_avg)[0]
 
 
 ## Correlation Between x and y
+cor1 = scipy.stats.pearsonr(changeVar, GarphIter_avg)[0]
+cor2 = scipy.stats.pearsonr(changeVar, winner_per_graph_avg)[0]
+cor3 = scipy.stats.pearsonr(changeVar, winner_change_graph_avg)[0]
 
 graph1_cor = cor_check(cor1)
 graph2_cor = cor_check(cor2)
