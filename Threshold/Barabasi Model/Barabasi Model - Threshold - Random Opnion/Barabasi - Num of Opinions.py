@@ -1,4 +1,5 @@
 from networkx import barabasi_albert_graph, nx, graph, extended_barabasi_albert_graph
+import scipy
 import matplotlib.pyplot as plt
 import seaborn as sns
 import random
