@@ -364,7 +364,7 @@ box_lists.clear()
 print()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
-        box_lists_sparate.append(winner_per_graph[i][j])
+        box_lists_sparate.append(winner_per_graph[i][j]/10)
     box1 = box_lists_sparate[:]
     box_lists.append(box1)
     box_lists_sparate.clear()
