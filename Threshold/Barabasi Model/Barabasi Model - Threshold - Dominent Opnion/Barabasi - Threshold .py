@@ -252,7 +252,6 @@ for seedi in range(number_of_seeds):
         change = True
         numOfIteration = 0
         while (change):
-            numOfIteration=0
             if (max_of_iter == numOfIteration):
                 print("break while")
                 break
