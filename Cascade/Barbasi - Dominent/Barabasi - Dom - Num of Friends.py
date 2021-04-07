@@ -266,6 +266,7 @@ for seedi in range(number_of_seeds):
 
         for number_of_iter in range (max_of_iter):
             blocked.clear()
+            numOfIteration=0
             while(True):
                 numOfIteration += 1
                 choose_friends(friends, Opinions , barabasiGraph, blocked)
