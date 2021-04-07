@@ -258,7 +258,7 @@ for seedi in range(number_of_seeds):
         start_winner_graph = copy.deepcopy(winnerVotes)
         Opinions = copy.deepcopy(Opinions2)
 
-        changeVar[a1] = percent_of_change
+        changeVar[a1] = round(percent_of_change,2)
         print()
         print("The Round : ", a1 + 1, "the", Xlegend, "is : ", changeVar[a1])
         prints(typeOfVotes, winnerVotes, winnerStart, Opinions2, edges)
@@ -331,7 +331,7 @@ box_lists = list()
 box_lists_sparate = list()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
-        box_lists_sparate.append(GarphIter[i][j])
+        box_lists_sparate.append(GarphIter[i][j]/10)
     box1 = box_lists_sparate[:]
     box_lists.append(box1)
     box_lists_sparate.clear()
