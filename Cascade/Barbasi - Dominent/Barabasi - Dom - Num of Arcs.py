@@ -323,7 +323,7 @@ box_lists = list()
 box_lists_sparate = list()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
-        box_lists_sparate.append(GarphIter[i][j])
+        box_lists_sparate.append(GarphIter[i][j]/10)
     box1 = box_lists_sparate[:]
     box_lists.append(box1)
     box_lists_sparate.clear()
