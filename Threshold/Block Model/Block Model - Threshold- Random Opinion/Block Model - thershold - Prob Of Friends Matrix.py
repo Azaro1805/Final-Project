@@ -252,7 +252,7 @@ for seedi in range(number_of_seeds):
         MaxFriendsIn = 0.4 + a1 / 20
         MinFriendsOut = 0.01 + a1 / 50
         MaxFriendsOut = 0.1 + a1 / 50
-        changeVar[a1] = MinFriendsIn
+        changeVar[a1] = round(MinFriendsIn,2)
         probMatrix(numberOfCom, probs, MinFriendsIn, MaxFriendsIn)
         BlockGraph = nx.stochastic_block_model(sizes, probs, seed=seede)
         edges = nx.edges(BlockGraph)
