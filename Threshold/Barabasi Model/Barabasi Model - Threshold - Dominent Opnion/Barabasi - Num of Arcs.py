@@ -1,3 +1,4 @@
+import scipy
 from networkx import barabasi_albert_graph, nx, graph, extended_barabasi_albert_graph
 import matplotlib.pyplot as plt
 import seaborn as sns
