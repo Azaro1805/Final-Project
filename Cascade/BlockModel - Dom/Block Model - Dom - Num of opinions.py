@@ -366,7 +366,7 @@ for seedi in range(number_of_seeds):
     print(np.matrix(changeVar))
     print(np.matrix(TotalIter))
 
-# Number of Iterations VS number of com plot
+# Number of Changes Opinions VS number of com plot
 
 # box plots graph
 print()
