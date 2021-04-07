@@ -199,11 +199,11 @@ def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph
         winner_change_graph[seedi][a1] = 1
 
 
-number_of_seeds = 1
+number_of_seeds = 20
 max_of_iter= 10
 numberOfCom = 10
-MinPeople = 2
-MaxPeople = 2
+MinPeople = 20
+MaxPeople = 25
 sizes = [ 0 for i in range(numberOfCom) ]
 probs = [ [ 0 for i in range(numberOfCom) ] for j in range(numberOfCom) ]
 MinFriendsIn = 0.4

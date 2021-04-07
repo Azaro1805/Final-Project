@@ -354,7 +354,7 @@ for seedi in range(number_of_seeds):
     print(np.matrix(TotalIter))
 
 # Number of Iterations VS number of com plot
-print("Number of Iterations VS number of opinions plot")
+print("Number of Changes Opinions VS number of opinions plot")
 print(np.matrix(GarphIter))
 for i in range (number_of_seeds):
     for j in range(len(TotalIter)):
