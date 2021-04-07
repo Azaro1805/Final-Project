@@ -221,7 +221,7 @@ def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph
     else:
         winner_change_graph[seedi][a1] = 1
 
-number_of_seeds = 20
+number_of_seeds = 1
 max_of_iter= 10
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.7
@@ -304,6 +304,7 @@ for seedi in range(number_of_seeds):
         #print(friends)
 
         for number_of_iter in range(max_of_iter):
+            numOfIteration = 0
             blocked.clear()
             while (True):
                 numOfIteration += 1

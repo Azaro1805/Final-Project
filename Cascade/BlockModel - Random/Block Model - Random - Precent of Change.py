@@ -267,6 +267,7 @@ for seedi in range(number_of_seeds):
         change = True
         numOfIteration=0
         for number_of_iter in range(max_of_iter):
+            numOfIteration = 0
             blocked.clear()
             while (True):
                 numOfIteration += 1
