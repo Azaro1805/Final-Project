@@ -217,7 +217,7 @@ def getValue(a):
         return x
 
 percent_of_change = 0.6
-number_of_seeds = 1
+number_of_seeds = 20
 max_of_iter = 10
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.7
