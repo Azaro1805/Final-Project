@@ -204,7 +204,7 @@ changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 winnerVotes= [0 for i2 in range(len(typeOfVotes))]
 Opinions2={}
-number_of_seeds = 20
+number_of_seeds = 2
 blocked = set()
 
 GarphIter = [[0 for j in range(xLengthGraph)] for i in range(number_of_seeds)]
@@ -229,7 +229,7 @@ for seedi in range(number_of_seeds):
         Clean(winnerVotes)
 
         num_of_Arcs = 4+(1*a1)
-        barabasiGraph = barabasi_albert_graph(300, num_of_Arcs, seed=seede)
+        barabasiGraph = barabasi_albert_graph(30, num_of_Arcs, seed=seede)
         #  מתחיל לייצר קשתות רק כאשר יש לו אמ קודקודים ברשת
         # (n-m)m = edge
 
@@ -257,6 +257,7 @@ for seedi in range(number_of_seeds):
         #print("friends[171] = ", friends[171])
 
         for number_of_iter in range (max_of_iter):
+            numOfIteration = 0
             blocked.clear()
             while(True):
                 numOfIteration += 1
