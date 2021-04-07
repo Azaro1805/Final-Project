@@ -275,7 +275,7 @@ for seedi in range(number_of_seeds):
 
         #print("friends :")
         #print(friends)
-
+        numOfIteration=0
         while(change):
             if (max_of_iter == numOfIteration):
                 print("break while")
