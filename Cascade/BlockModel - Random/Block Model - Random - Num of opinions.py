@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy
 import random
 import numpy as np
 import copy
@@ -221,6 +222,18 @@ def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph
     else:
         winner_change_graph[seedi][a1] = 1
 
+def cor_check (cor):
+    if(cor == 1 ):
+        return "perfect positive linear relationship"
+    if (cor == -1):
+        return "perfect negative linear relationship"
+    if (cor == 0):
+        return "no linear relationship"
+    if (cor > 0):
+        return "positive correlation"
+    if (cor < 0):
+        return "negative correlation" 
+        
 number_of_seeds = 20
 max_of_iter= 10
 MinFriendsIn = 0.4
@@ -343,7 +356,30 @@ for seedi in range(number_of_seeds):
     print(np.matrix(changeVar))
     print(np.matrix(TotalIter))
 
-# Number of Iterations VS number of com plot
+############################################## Graphs ###################################
+
+# Number of Changes Opinions graph
+
+# box plots graph
+print()
+box_lists = list()
+box_lists_sparate = list()
+for j in range(len(TotalIter)):
+    for i in range (number_of_seeds):
+        box_lists_sparate.append(GarphIter[i][j]/10)
+    box1 = box_lists_sparate[:]
+    box_lists.append(box1)
+    box_lists_sparate.clear()
+
+print(box_lists)
+print()
+ax = sns.boxplot(data=box_lists)
+plt.xticks(range(0,xLengthGraph),changeVar)
+plt.xlabel("Number of Opinions")
+plt.ylabel("Number of Changes Opinions")
+plt.show()
+
+# graph
 print("Number of Iterations VS number of opinions plot")
 print(np.matrix(GarphIter))
 for i in range (number_of_seeds):
@@ -360,8 +396,28 @@ print(np.matrix(GarphIter_avg))
 Ylabel= "Number of Changes Opinions"
 CreatePlotGraph (changeVar, GarphIter_avg , "Number of opinions" , Ylabel)
 
+# Winner Present Votes
 
-# Winner Present Votes VS number of com plot
+#boxplot
+box_lists_sparate.clear()
+box_lists.clear()
+print()
+for j in range(len(TotalIter)):
+    for i in range (number_of_seeds):
+        box_lists_sparate.append(winner_per_graph[i][j])
+    box1 = box_lists_sparate[:]
+    box_lists.append(box1)
+    box_lists_sparate.clear()
+
+print(box_lists)
+print()
+ax = sns.boxplot(data=box_lists)
+plt.xticks(range(0,xLengthGraph),changeVar)
+plt.xlabel("Num of opinions")
+plt.ylabel("Diff Between Start to End Present Winner Votes")
+plt.show()
+
+# graph
 print("Winner Present Votes VS number of com plot")
 print(np.matrix(winner_per_graph))
 
@@ -397,3 +453,16 @@ print(np.matrix(winner_change_graph_avg))
 
 Ylabel= "Winner change in %"
 CreatePlotGraph (changeVar, winner_change_graph_avg , "Number of opinions" , Ylabel)
+
+## Correlation Between x and y
+cor1 = scipy.stats.pearsonr(changeVar, GarphIter_avg)[0]
+cor2 = scipy.stats.pearsonr(changeVar, winner_per_graph_avg)[0]
+cor3 = scipy.stats.pearsonr(changeVar, winner_change_graph_avg)[0]
+
+graph1_cor = cor_check(cor1)
+graph2_cor = cor_check(cor2)
+graph3_cor = cor_check(cor3)
+print()
+print("graph 1 Correlation Between x and y :", round(cor1,3), graph1_cor)
+print("graph 2 Correlation Between x and y :", round(cor2,3), graph2_cor)
+print("graph 3 Correlation Between x and y :", round(cor3,3), graph3_cor)
