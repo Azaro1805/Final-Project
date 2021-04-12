@@ -246,7 +246,6 @@ xLengthGraph= 5  # between 2 - 6 types of votes ! dont change !
 Xlegend = "Number of Votes"
 TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
-numberOfCom = 0
 WinnerGraph = [ "" for j in range(xLengthGraph)]
 Opinions2 = {}
 change = True

@@ -244,7 +244,7 @@ def cor_check (cor):
     if (cor < 0):
         return "negative correlation"
 
-number_of_seeds = 2
+number_of_seeds = 20
 max_of_iter= 10
 MinFriendsIn = 0.4
 MaxFriendsIn = 0.7

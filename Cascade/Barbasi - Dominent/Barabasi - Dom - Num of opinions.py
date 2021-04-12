@@ -1,3 +1,4 @@
+import scipy
 from networkx import barabasi_albert_graph, nx, graph, extended_barabasi_albert_graph
 import matplotlib.pyplot as plt
 import scipy
@@ -369,7 +370,7 @@ for i in range (number_of_seeds):
 print(np.matrix(GarphIter_avg))
 
 for i in range(len(TotalIter)):
-    GarphIter_avg[i] = round(GarphIter_avg[i]/(number_of_seeds*10),3)
+    GarphIter_avg[i] = round(GarphIter_avg[i]/(number_of_seeds),3)
 
 print(np.matrix(GarphIter_avg))
 

@@ -244,7 +244,7 @@ def cor_check (cor):
 
 number_of_seeds = 20
 max_of_iter= 10
-numberOfCom = 5
+numberOfCom = 10
 MinPeople = 20
 MaxPeople = 25
 sizes = [ 0 for i in range(numberOfCom) ]
