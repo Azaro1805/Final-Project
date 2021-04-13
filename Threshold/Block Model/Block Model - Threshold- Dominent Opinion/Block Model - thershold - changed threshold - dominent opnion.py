@@ -178,6 +178,18 @@ def calculate_winner_change_to_graph(start_change_winner_graph, end_winner_graph
         winner_change_graph[seedi][a1] = 0
     else:
         winner_change_graph[seedi][a1] = 1
+        
+def cor_check (cor):
+    if(cor == 1 ):
+        return "perfect positive linear relationship"
+    if (cor == -1):
+        return "perfect negative linear relationship"
+    if (cor == 0):
+        return "no linear relationship"
+    if (cor > 0):
+        return "positive correlation"
+    if (cor < 0):
+        return "negative correlation"         
 
 
 number_of_seeds = 50
