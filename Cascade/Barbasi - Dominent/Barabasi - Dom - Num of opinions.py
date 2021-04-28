@@ -228,7 +228,7 @@ TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 Opinions2={}
-number_of_seeds = 1
+number_of_seeds = 20
 blocked = set()
 num_of_Arcs = 10
 num_of_Friends = 300
@@ -386,7 +386,7 @@ box_lists.clear()
 print()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
-        box_lists_sparate.append(winner_per_graph[i][j]/10)
+        box_lists_sparate.append(winner_per_graph[i][j])
     box1 = box_lists_sparate[:]
     box_lists.append(box1)
     box_lists_sparate.clear()
