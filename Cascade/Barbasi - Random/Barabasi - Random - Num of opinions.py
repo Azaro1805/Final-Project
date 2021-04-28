@@ -217,7 +217,7 @@ TotalIter = [0 for a3 in range (xLengthGraph)]
 changeVar = [0 for a4 in range (xLengthGraph)]
 WinnerGraph = [ 0 for i in range(xLengthGraph) ]
 Opinions2={}
-number_of_seeds = 1
+number_of_seeds = 20
 blocked = set()
 num_of_Arcs = 10
 num_of_Friends = 300
@@ -331,7 +331,7 @@ box_lists = list()
 box_lists_sparate = list()
 for j in range(len(TotalIter)):
     for i in range (number_of_seeds):
-        box_lists_sparate.append(GarphIter[i][j]/10)
+        box_lists_sparate.append(GarphIter[i][j])
     box1 = box_lists_sparate[:]
     box_lists.append(box1)
     box_lists_sparate.clear()
